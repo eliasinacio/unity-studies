@@ -7,7 +7,13 @@ public class Player : MonoBehaviour
     public float speed;
 
     private Rigidbody2D rig;
-    private Vector2 direction;
+    private Vector2 _direction;
+
+    public Vector2 direction
+    {
+        get { return _direction; }
+        set { _direction = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +25,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Get and save the input direction
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        _direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     private void FixedUpdate()
     {
         // Move position when 
-        rig.MovePosition(rig.position + direction * speed * Time.fixedDeltaTime);
+        rig.MovePosition(rig.position + _direction * speed * Time.fixedDeltaTime);
     }
 }
