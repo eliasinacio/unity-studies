@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -16,6 +17,14 @@ public class PlayerAnimation : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        OnMove();
+        OnRun();
+    }
+
+    #region Moviment
+
+    void OnMove()
     {
         if (player.direction.sqrMagnitude > 0)
         {
@@ -36,4 +45,14 @@ public class PlayerAnimation : MonoBehaviour
             transform.eulerAngles = new Vector2(0, 180);
         }
     }
+
+    void OnRun()
+    {
+        if (player.isRunning && (player.direction.x != 0 || player.direction.y != 0))
+        {
+            animator.SetInteger("transition", 2);
+        }
+    }
+
+    #endregion
 }
